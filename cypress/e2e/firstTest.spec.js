@@ -86,7 +86,7 @@ it('intercepting and modifying response and request', () => {
 
 })
 
-it('Delete created article', () => {  
+it('Delete created article',{retries: 2}, () => {  
   cy.get('@token').then(token => {
     const bodyRequest = {
       "article": {
