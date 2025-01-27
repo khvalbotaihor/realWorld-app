@@ -10,7 +10,7 @@ beforeEach(() => {
 
 
   it('verify correct request and response', () => {
-    cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles');
+    cy.intercept('POST', `${Cypress.env('apiUrl')}/api/articles/`).as('postArticles');
     
     
     
@@ -38,9 +38,9 @@ beforeEach(() => {
   })
 
 it('verify global feed likes count', () => {
-  cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles/feed*', {articles: [], articlesCount: 0});
+  cy.intercept('GET', `${Cypress.env('apiUrl')}/api/articles/feed*`, {articles: [], articlesCount: 0});
 
-  cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/articles*', {fixture: 'articles.json'});
+  cy.intercept('GET', `${Cypress.env('apiUrl')}/api/articles*`, {fixture: 'articles.json'});
   cy.get('app-article-list button').then(listOfButtons => {  
     expect(listOfButtons[0]).to.contain('1');
     expect(listOfButtons[1]).to.contain('5');
@@ -50,7 +50,7 @@ it('verify global feed likes count', () => {
   cy.fixture('articles').then(file => {
     const articleLink = file.articles[1].slug;
     file.articles[1].favoritesCount = 6;
-    cy.intercept('POST', `https://conduit-api.bondaracademy.com/api/articles/${articleLink}/favorite`, file);
+    cy.intercept('POST', `${Cypress.env('apiUrl')}/api/articles/${articleLink}/favorite`, file);
     cy.get('app-article-list button').eq(1).click().should('contain', '6');
   })
 
@@ -86,7 +86,7 @@ it('intercepting and modifying response and request', () => {
 
 })
 
-it.only('Delete created article', () => {  
+it('Delete created article', () => {  
   cy.get('@token').then(token => {
     const bodyRequest = {
       "article": {
@@ -99,7 +99,7 @@ it.only('Delete created article', () => {
 
     cy.request({
       method: 'POST',
-      url: 'https://conduit-api.bondaracademy.com/api/articles/',
+      url: `${Cypress.env('apiUrl')}/api/articles/`,
       headers: {
         'Authorization': `Token ${token}`
       },
@@ -114,7 +114,7 @@ it.only('Delete created article', () => {
     cy.get('.btn').contains('Delete Article').first().click();
     cy.request({
       method: 'GET',
-      url: 'https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0',
+      url: `${Cypress.env('apiUrl')}/api/articles?limit=10&offset=0`,
       headers: {
         'Authorization': `Token ${token}`
       }

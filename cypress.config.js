@@ -3,6 +3,12 @@ const { defineConfig } = require("cypress");
 module.exports = defineConfig({
   viewportWidth: 1920,
   viewportHeight: 1080,
+  video: true,
+  env:{
+    username: "jim@test.com",
+    password: "jim",
+    apiUrl: "https://conduit-api.bondaracademy.com",
+  },
   
   e2e: {
     setupNodeEvents(on, config) {
