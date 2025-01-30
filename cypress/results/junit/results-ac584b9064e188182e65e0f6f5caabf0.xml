@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="26.151" tests="5" failures="2">
+  <testsuite name="Root Suite" timestamp="2025-01-30T10:20:37" tests="0" file="cypress/e2e/firstTest.spec.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Test with backend" timestamp="2025-01-30T10:20:37" tests="5" time="26.137" failures="2">
+    <testcase name="Test with backend verify correct request and response" time="3.103" classname="verify correct request and response">
+      <failure message="expected 422 to equal 200" type="AssertionError"><![CDATA[AssertionError: expected 422 to equal 200
+    at captureUserInvocationStack (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:138199:94)
+    at Proxy.<anonymous> (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:138227:9)
+    at Proxy.assertEqual (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:79824:12)
+    at Proxy.methodWrapper (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:77670:25)
+    at Context.eval (webpack://realworld-app/./cypress/e2e/firstTest.spec.js:22:41)
+    at getRet (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:118320:20)
+    at tryCatcher (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:1777:23)
+    at Promise.attempt.Promise.try (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:4285:29)
+    at Context.thenFn (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:118331:66)
+    at Context.then (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:118582:21)
+
+      + expected - actual
+
+      -422
+      +200
+      ]]></failure>
+    </testcase>
+    <testcase name="Test with backend verify popular tags are displayed" time="0.963" classname="verify popular tags are displayed">
+    </testcase>
+    <testcase name="Test with backend verify global feed likes count" time="1.058" classname="verify global feed likes count">
+    </testcase>
+    <testcase name="Test with backend intercepting and modifying response and request" time="3.367" classname="intercepting and modifying response and request">
+      <failure message="Cannot read properties of undefined (reading &apos;description&apos;)" type="TypeError"><![CDATA[TypeError: Cannot read properties of undefined (reading 'description')
+    at eval (webpack://realworld-app/./cypress/e2e/firstTest.spec.js:64:30)
+    at <unknown> (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:136353:12)
+    at tryCatcher (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:1777:23)
+    at Promise.attempt.Promise.try (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:4285:29)
+    at onResponse (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:136352:64)
+    at <unknown> (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:135826:28)
+    at tryCatcher (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:1777:23)
+    at Promise.attempt.Promise.try (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:4285:29)
+    at $Cypress.<anonymous> (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:135790:59)
+    at EventEmitter.emit (https://conduit.bondaracademy.com/__cypress/runner/cypress_runner.js:140300:19)]]></failure>
+    </testcase>
+    <testcase name="Test with backend Delete created article" time="3.328" classname="Delete created article">
+    </testcase>
+  </testsuite>
+</testsuites>
