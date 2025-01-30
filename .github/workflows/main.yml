@@ -15,6 +15,11 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
       - name: Cache node_modules
         uses: actions/cache@v3
         id: npm-cache
@@ -30,4 +35,4 @@ jobs:
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          start: npx cypress run --spec "cypress/e2e/firstTest.spec.js" --browser chrome --headless --disable-gpu
+          start: npx cypress run --spec "cypress/e2e/firstTest.spec.js" --browser chrome --headless
