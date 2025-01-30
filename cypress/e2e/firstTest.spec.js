@@ -1,7 +1,4 @@
-const { request } = require("http");
-
 describe('Test with backend', () => {
-
 
 beforeEach(() => {
   cy.intercept({method: 'Get', path:'tags'}, {fixture: 'tags.json'});
