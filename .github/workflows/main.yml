@@ -1,38 +1,50 @@
-name: Cypress Tests
-
-on: push
-
+name: Playwright Tests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
 jobs:
-  cypress-run:
+  test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
-      - name: Cache node_modules
-        uses: actions/cache@v3
-        id: npm-cache
-        with:
-          path: node_modules
-          key: node-modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            node-modules-${{ runner.os }}-
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run Cypress tests
-        uses: cypress-io/github-action@v6
-        with:
-          start: npx cypress run --spec "cypress/e2e/firstTest.spec.js" --browser chrome --headless
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+    - name: Install missing system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          libasound2t64 \
+          libnss3 \
+          libxss1 \
+          libatk1.0-0 \
+          libatk-bridge2.0-0 \
+          libcups2 \
+          libxkbcommon0 \
+          libgbm1 \
+          libpango-1.0-0 \
+          libpangocairo-1.0-0 \
+          libgtk-3-0 \
+          libicu-dev \
+          libffi8 \
+          libx264-dev \
+          libjpeg-turbo8 \
+          libvpx8
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright Browsers (Manual Workaround)
+      run: |
+        npx playwright install chromium
+        npx playwright install firefox
+        npx playwright install webkit
+    - name: Run Playwright tests
+      run: npx playwright test
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
